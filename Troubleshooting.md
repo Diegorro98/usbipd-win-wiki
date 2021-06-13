@@ -1,6 +1,6 @@
 ## Running on Console
 
-The first thing to do is to stop the Windows service from the service manager and try running on a console.
+The first thing to do is to stop the Windows service and try running on a console.
 From an Administrator prompt, run:
 ```
 sc stop usbipd-win
