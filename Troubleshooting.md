@@ -1,12 +1,12 @@
 ## Running on Console
 
 The first thing to do is to stop the Windows service and try running on a console.
-From an Administrator prompt, run:
+From an Administrator command prompt, run:
 ```
 sc stop usbipd-win
 "C:\Program Files\dorssel\usbipd-win\UsbIpServer.exe" server
 ```
-or, using PowerShell,
+or, if you are using PowerShell,
 ```
 sc stop usbipd-win
 & 'C:\Program Files\dorssel\usbipd-win\UsbIpServer.exe' server
