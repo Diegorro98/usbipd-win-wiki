@@ -7,3 +7,4 @@
 | 050d:0012 | Belkin F8T012 Bluetooth Adapter        | 2.0         | :x:                | Requires INTR / UNLINK support       |
 | 1050:0407 | Yubikey 5                              | 2.0         | :x:                | Requires INTR / UNLINK support       |
 | 0529:0620 | SafeNet Aladdin Token                  | 2.0         | :heavy_check_mark: |                                      |
+| 2e04:c025 | HMD Global Nokia 9 PureView            | 2.0         | :heavy_check_mark: |                                      |
