@@ -1,21 +1,16 @@
 ## Running on Console
 
 The first thing to do is to stop the Windows service and try running on a console.
-From an Administrator command prompt, run:
-```
-sc stop usbipd-win
-"C:\Program Files\dorssel\usbipd-win\UsbIpServer.exe" server
-```
-or, if you are using PowerShell,
-```
-sc stop usbipd-win
-& 'C:\Program Files\dorssel\usbipd-win\UsbIpServer.exe' server
+As an Administrator, run:
+```pwsh
+sc stop usbipd
+usbipd server
 ```
 This will allow you to see a lot more logging on the console (see below).
 
 Once you are done troubleshooting, you can stop the console process by pressing `Ctrl+C` and then start the service again:
 ```
-sc start usbipd-win
+sc start usbipd
 ```
 
 ## Logging
@@ -24,8 +19,8 @@ When running as a service, logging is done to the Application EventLog. All warn
 at information level, only client device attach/detach is logged.
 
 When running on the console, however, logging can be more extensive. For example, to get all available logging, run the server with:
-```
-UsbIpServer.exe server Logging:LogLevel:Default=Trace
+```pwsh
+usbipd server Logging:LogLevel:Default=Trace
 ```
 
 For details on specifying Logging configuration options, see <https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-5.0>.
