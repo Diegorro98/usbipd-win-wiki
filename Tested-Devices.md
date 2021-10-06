@@ -9,3 +9,5 @@
 | 0529:0620 | SafeNet Aladdin Token                  | 2.0         | :heavy_check_mark: |                                      |
 | 2e04:c025 | HMD Global Nokia 9 PureView            | 2.0         | :heavy_check_mark: |                                      |
 | 1bcf:28a6 | DELL XPS Integrated Webcam             | 2.0         | :heavy_check_mark: |                                      |
+| 0c45:6366 | Microdia USB Camera                    | 2.0         | :heavy_check_mark: |                                      |
+| 0483:374b | STMicroelectronics ST-LINK/V2.1        | 1.1 / 2.0   | :heavy_check_mark: |                                      | 
