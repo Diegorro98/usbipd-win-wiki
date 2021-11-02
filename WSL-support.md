@@ -55,6 +55,26 @@ the WSL commands are invoked.
 
 # Setting up USBIP on WSL 2
 
+Recent versions of Windows running WSL kernel 5.10.60.1 or later already include support for common scenarios like USB-to-serial adapters and flashing embedded development boards. If you're trying to do one of these tasks on Ubuntu, you can avoid recompiling the kernel and follow the simplified setup. If you require special drivers, you'll need to build your own kernel for WSL 2.
+
+## Simplified setup
+
+The WSL kernel includes kernel level support for USBIP, but user space tools are missing. As a workaround on Ubuntu, tools from the package repository can be used. The kernel version of the tools won't exactly match the version used by WSL, but it still works. Similar approaches are likely possible for other Linux distros.
+
+    sudo apt install linux-tools-5.4.0-77-generic hwdata
+
+The tools are now installed, but because of the kernel version mismatch they won't be found when the `usbip` command is run. Edit `/etc/sudoers` so that root can find the usbip command.
+
+    sudo visudo
+
+Add `/usr/lib/linux-tools/5.4.0-77-generic` to the _beginning_ of `secure_path`. After editing, the line should look similar to this.
+
+    Defaults secure_path="/usr/lib/linux-tools/5.4.0-77-generic:/usr/local/sbin:..."
+
+At this point a service is running on Windows to share USB devices, and the necessary tools are installed in WSL to attach to shared devices.
+
+## Building a kernel
+
 Update WSL:
 
 ```pwsh
