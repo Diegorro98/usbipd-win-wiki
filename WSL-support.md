@@ -4,11 +4,35 @@ SPDX-FileCopyrightText: Microsoft Corporation
 SPDX-License-Identifier: GPL-2.0-only
 -->
 
+# WSL setup
+
+Running uname -a from within WSL should report a kernel version of 5.10.60.1 or later. You’ll need to be running a WSL 2 distro.
+
+From within WSL, install the user space tools for USB/IP and a database of USB hardware identifiers. On Ubuntu, run this command.
+
+```bash
+sudo apt install linux-tools-5.4.0-77-generic hwdata
+```
+
+Edit /etc/sudoers so that root can find the usbip command. On Ubuntu, run this command.
+```bash
+sudo visudo
+```
+Add /usr/lib/linux-tools/5.4.0-77-generic to the beginning of secure_path. After editing, the line should look similar to this.
+```bash
+Defaults secure_path="/usr/lib/linux-tools/5.4.0-77-generic:/usr/local/sbin:..."
+```
+Note that depending on your application, you may need to configure udev rules to allow non-root users to access the device. Rules to enable a device must be in place before connecting the device. As a common example for using embedded devices with openocd copy share/openocd/contrib60-openocd.rules to the /etc/udev/rules.d folder. 
+
+After updating your rules run udevadm control --reload. If you get an error that "Failed to send reload request: No such file or directory", run sudo service udev restart then run it again.
+
 # WSL convenience commands
 
-After following the setup instructions below, you can use the WSL convenience
-commands to easily attach devices to a WSL instance and view which distributions
-devices are attached to.
+After following the setup instructions above and installing usbipd in Windows, you can use the usbipd WSL convenience commands to easily attach devices to a WSL instance and view which distributions devices are attached to.
+
+First ensure a WSL command prompt is open. This will keep the WSL 2 lightweight VM active.
+
+From an administrator command prompt on Windows, run this command. It will list all the USB devices connected to Windows.
 
 ```pwsh
 > usbipd wsl list
@@ -16,10 +40,16 @@ BUSID  DEVICE                                      STATE
 1-7    USB Input Device                            Not attached
 4-4    STMicroelectronics STLink dongle, STMic...  Not attached
 5-2    Surface Ethernet Adapter                    Not attached
+```
 
+Select the bus ID of the device you’d like to attach to WSL and run this command. You’ll be prompted by WSL for a password to run a sudo command.
+```pwsh
 > usbipd wsl attach --busid 4-4
 [sudo] password for user:
+```
 
+Now we can run list again and see the device is shared with WSL.
+```pwsh
 > usbipd wsl list
 BUSID  DEVICE                                      STATE
 1-7    USB Input Device                            Not attached
@@ -27,7 +57,7 @@ BUSID  DEVICE                                      STATE
 5-2    Surface Ethernet Adapter                    Not attached
 ```
 
-Now the device is available in WSL.
+From within WSL, run lsusb to list the attached USB devices. You should see the device you just attached and be able to interact with it using normal Linux tools. 
 
 ```bash
 $ lsusb
@@ -53,7 +83,7 @@ Use the `--help` to learn more about these convenience commands. In particular,
 the `--distribution` and `--usbippath` options can be useful to customize how
 the WSL commands are invoked.
 
-# Setting up USBIP on WSL 2
+# Building your own USBIP enabled WSL 2 kernel
 
 Recent versions of Windows running WSL kernel 5.10.60.1 or later already include support for common scenarios like USB-to-serial adapters and flashing embedded development boards. If you're trying to do one of these tasks on Ubuntu, you can avoid recompiling the kernel and follow the simplified setup. If you require special drivers, you'll need to build your own kernel for WSL 2.
 
