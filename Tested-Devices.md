@@ -10,5 +10,6 @@
 | 2e04:c025 | HMD Global Nokia 9 PureView            | 2.0         | :heavy_check_mark: |                                      |
 | 1bcf:28a6 | DELL XPS Integrated Webcam             | 2.0         | :heavy_check_mark: |                                      |
 | 0c45:6366 | Microdia USB Camera                    | 2.0         | :heavy_check_mark: |                                      |
-| 0483:374b | STMicroelectronics ST-LINK/V2.1        | 1.1 / 2.0   | :heavy_check_mark: |                                      | 
-| 10c4:ea60 | Silicon Labs CP210x UART Bridge        | 1.1         | :yellow_circle:    | Driver not present, requires building kernel | 
+| 0483:374b | STMicroelectronics ST-LINK/V2.1        | 1.1 / 2.0   | :heavy_check_mark: |                                      |
+| 10c4:ea60 | Silicon Labs CP210x UART Bridge        | 1.1         | :yellow_circle:    | Driver not present, requires building kernel |
+| 1915:7777 | Nordic Semiconductor ASA Crazyradio PA USB Dongle | 1.1 | :red_square:    | See [#64](https://github.com/dorssel/usbipd-win/issues/64) |
