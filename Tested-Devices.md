@@ -11,5 +11,6 @@
 | 1bcf:28a6 | DELL XPS Integrated Webcam             | 2.0         | :heavy_check_mark: |                                      |
 | 0c45:6366 | Microdia USB Camera                    | 2.0         | :heavy_check_mark: |                                      |
 | 0483:374b | STMicroelectronics ST-LINK/V2.1        | 1.1 / 2.0   | :heavy_check_mark: |                                      |
-| 10c4:ea60 | Silicon Labs CP210x UART Bridge        | 1.1         | :yellow_circle:    | Driver not present, requires building kernel |
-| 1915:7777 | Nordic Semiconductor ASA Crazyradio PA USB Dongle | 1.1 | :red_square:    | See [#64](https://github.com/dorssel/usbipd-win/issues/64) |
+| 10c4:ea60 | Silicon Labs CP210x UART Bridge        | 1.1         | :yellow_circle:    | WSL: Driver not present, requires building kernel |
+| 1915:7777 | Nordic Semiconductor ASA Crazyradio PA USB Dongle | 1.1 | :yellow_circle: | (possibly) fixed in master, not released yet      |
+| 0781:5588 | SanDisk Corp. USB Extreme Pro          | 3.0 / 3.1   | :heavy_check_mark: |                                      |
