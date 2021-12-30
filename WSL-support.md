@@ -102,7 +102,7 @@ wsl --update
 List your distributions.
 
 ```pwsh
-wsl --list --vebose
+wsl --list --verbose
 ```
 
 Verify that your target distribution is version 2;
