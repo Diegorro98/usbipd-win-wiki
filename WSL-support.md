@@ -6,31 +6,30 @@ SPDX-License-Identifier: GPL-2.0-only
 
 # WSL setup
 
+## WSL version
+
 Running uname -a from within WSL should report a kernel version of 5.10.60.1 or later. You’ll need to be running a WSL 2 distro.
 
-From within WSL, install the user space tools for USB/IP and a database of USB hardware identifiers. On Ubuntu, run this command.
+## USB/IP client tools
+
+From within WSL, install the user space tools for USB/IP and a database of USB hardware identifiers. On Ubuntu 20.04 LTS, run these commands:
 
 ```bash
 sudo apt install linux-tools-5.4.0-77-generic hwdata
+sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/5.4.0-77-generic/usbip 20
 ```
 
-Edit /etc/sudoers so that root can find the usbip command. On Ubuntu, run this command.
-```bash
-sudo visudo
-```
-Add /usr/lib/linux-tools/5.4.0-77-generic to the beginning of secure_path. After editing, the line should look similar to this.
-```bash
-Defaults secure_path="/usr/lib/linux-tools/5.4.0-77-generic:/usr/local/sbin:..."
-```
+⚠️ **These instructions have changed.**\
+Updating to `usbipd-win` version 2.0.0 or higher will require these new instructions, even if the old instructions were followed before.
+
+:information_source: **Other distributions.**\
+For other distributions a different `usbip` client package may be required. In any case, make sure that the resulting `usbip` command is in the PATH for user root; for example by adjusting the above `update-alternatives`. Please search the (possibly closed) [issues](https://github.com/dorssel/usbipd-win/issues?q=is%3Aissue) to see if instructions for your distribution are already known.
+
+## udev
+
 Note that depending on your application, you may need to configure udev rules to allow non-root users to access the device. Rules to enable a device must be in place before connecting the device. As a common example for using embedded devices with openocd copy share/openocd/contrib60-openocd.rules to the /etc/udev/rules.d folder. 
 
-After updating your rules run udevadm control --reload. If you get an error that "Failed to send reload request: No such file or directory", run sudo service udev restart then run it again.
-
-At this point the `usbip` command should be available to root, and running `sudo usbip` in WSL should successfully find the command. For non-root access, edit your `.bashrc` to add an alias.
-
-```bash
-alias usbip=/usr/lib/linux-tools/5.4.0-77-generic/usbip
-```
+After updating your rules run `udevadm control --reload`. If you get an error that "Failed to send reload request: No such file or directory", run `sudo service udev restart` then run it again.
 
 # WSL convenience commands
 
@@ -89,7 +88,7 @@ Use the `--help` to learn more about these convenience commands. In particular,
 the `--distribution` and `--usbippath` options can be useful to customize how
 the WSL commands are invoked.
 
-# Building your own USBIP enabled WSL 2 kernel
+# Building your own USB/IP enabled WSL 2 kernel
 
 _Recent versions of Windows running WSL kernel 5.10.60.1 or later already include support for common scenarios like USB-to-serial adapters and flashing embedded development boards. If you're trying to do one of these tasks on Ubuntu, you can avoid recompiling the kernel by following the WSL Setup instructions at the top of this page. If you require special drivers, you'll need to build your own kernel for WSL 2._
 
@@ -188,7 +187,7 @@ In the following command the number '8' is the number of cores to use; run `getc
 sudo make -j 8 && sudo make modules_install -j 8 && sudo make install -j 8
 ```
 
-Build USBIP tools.
+Build USB/IP tools.
 
 ```bash
 cd tools/usb/usbip
