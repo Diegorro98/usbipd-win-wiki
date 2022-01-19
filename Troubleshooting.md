@@ -23,7 +23,7 @@ When running on the console, however, logging can be more extensive. For example
 usbipd server Logging:LogLevel:Default=Trace
 ```
 
-For details on specifying Logging configuration options, see <https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-5.0>.
+For details on specifying logging configuration options, see <https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-6.0>.
 
 Strictly speaking, it is also possible to change the logging levels for the service, but you will have to change the service startup command. This is possible, but not trivial.
 
