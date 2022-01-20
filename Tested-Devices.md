@@ -19,11 +19,14 @@
 
 #  Device Test Procedure 
 
-**Preparation:** Before testing new devices, please configure your machine and verify your setup with at least one other known good device.
+## Preparation 
+Before testing new devices, please configure your machine and verify your setup with at least one other known good device.
 
-## Verify WSL (from a Windows prompt)
+### Verify WSL version
+(from a Windows prompt
 
-- [ ] `wsl --list --verbose` Verify that you are running as WSL version 2
+- [ ] `wsl --list --verbose`  
+  Verify that you are running as WSL version 2
 ```
   NAME      STATE           VERSION
 * Ubuntu    Running         2
@@ -31,27 +34,29 @@
 
 ## Verify device
 
-- [ ]  Plug the USB device into a USB port
+- [ ]  Plug the USB device into a USB port  
+  Verify that the device is connected and recognized by Windows
 
-### From a Windows **Elevated** prompt (run as Administrator)
+### Share usb device
+From a Windows **Elevated** prompt (run as Administrator), run the following 
 
-- [ ] `usbipd list`
+
+- [ ] `usbipd list`  
   Verify that the device is visible and note the BUSID
-- [ ] `usbipd wsl list`
+- [ ] `usbipd wsl list`  
   Verify that the device is visible, and listed as **'Not attached'**
-- [ ] `usbipd wsl attach --busid <BUSID>`
+- [ ] `usbipd wsl attach --busid <BUSID>`  
   Verify that the device state is now **`Shared`**
-- [ ] `usbipd wsl list`
+- [ ] `usbipd wsl list`  
   Verify that the device is visible, and listed as **'Attached - Ubuntu'** (name of your distro may vary)
 
 
-### From a WSL prompt
+### Verify USB available in WSL
  
 Below steps are based on Ubuntu, details may vary for other distros.
+#### All USB device types 
 
-*For USB serial ports:*
-
-- [ ] `lsusb`
+- [ ] `lsusb`  
   Verify that the device is visible
     ```log
     jos@contoso:/mnt/c/Users/jos$ lsusb
@@ -59,7 +64,7 @@ Below steps are based on Ubuntu, details may vary for other distros.
     Bus 001 Device 002: ID f055:9800 MicroPython Pyboard Virtual Comm Port in FS Mode
     Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
     ```
-- [ ] `dmesg | tail`
+- [ ] `dmesg | tail`  
   There should be a recent message indicating that the the device has been discovered similar to the example below.
     ``` log
     jos@contoso:/mnt/c/Users/jos$ dmesg | tail
@@ -74,16 +79,18 @@ Below steps are based on Ubuntu, details may vary for other distros.
     [ 2401.453015] usb 1-1: SerialNumber: 206437A1304E
     [ 2401.458834] cdc_acm 1-1:1.1: ttyACM0: USB ACM device
     ```
-- [ ] `ls /dev/tty*`
+
+#### USB serial port devices
+- [ ] `ls /dev/tty*`  
   Verify that the device is visible as `/tty/S<n>` or `/tty/ACM<n>`
 
 For terminal like devices:
-- [ ] `screen /dev/ttyACM0 115200`
-  Verify that you can connect to the device and interact or send / recieve .
+- [ ] `screen /dev/ttyACM0 115200`  
+  Verify that you can connect to the device and interact or send / receive .
 
-*For USB Composite Devices:*
-- [ ] run `lsusb --tree`
-  Verify that all expected usb interfaces are shown, such as mass storage and comunication devices
+#### USB Composite Devices:
+- [ ] run `lsusb --tree`  
+  Verify that all expected USB interfaces are shown, such as mass storage and communication devices
     ```log
     jos@contoso:/mnt/c/Users/jos$ lsusb --tree
     /:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=vhci_hcd/8p, 5000M
@@ -93,3 +100,4 @@ For terminal like devices:
         |__ Port 1: Dev 2, If 1, Class=Communications, Driver=cdc_acm, 12M
         |__ Port 1: Dev 2, If 2, Class=CDC Data, Driver=cdc_acm, 12M
     ``` 
+  
