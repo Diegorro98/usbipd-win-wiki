@@ -15,7 +15,7 @@ usbipd state
 
 A PowerShell module was added that further processes the JSON output to strongly-typed objects that also adds some metadata that can be inferred from the information. The PowerShell module is compatible with Powershell 5.1 (the default that comes with Windows 10) as well a PowerShell 7 (from the Windows Store). The PowerShell module is tied to the version of `usbipd-win`, so it will not be released to PowerShell Gallery separately. Instead, you will have to import the module manually as follows:
 ```pwsh
-Import-Module $env:ProgramFiles'\usbipd-win\PowerShell\Usbipd.Powershell.dll'
+Import-Module $env:ProgramW6432'\usbipd-win\PowerShell\Usbipd.Powershell.dll'
 ```
 
 The PowerShell module exposes a single command:
