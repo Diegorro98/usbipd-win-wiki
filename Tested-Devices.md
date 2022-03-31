@@ -12,7 +12,6 @@
 | 0c45:6366 | Microdia USB Camera                               | 2.0         | :heavy_check_mark: |                                                   |
 | 0483:374b | STMicroelectronics ST-LINK/V2.1                   | 1.1 / 2.0   | :heavy_check_mark: |                                                   |
 | 10c4:ea60 | Silicon Labs CP210x UART Bridge                   | 1.1         | :heavy_check_mark: | WSL: Driver present in kernel 5.10.102.1 
-|
 | 1915:7777 | Nordic Semiconductor ASA Crazyradio PA USB Dongle | 1.1         | :yellow_circle:    | (possibly) fixed in master, not released yet      |
 | 0781:5588 | SanDisk Corp. USB Extreme Pro                     | 3.0 / 3.1   | :heavy_check_mark: |                                                   |
 | f055:9800 | MicroPython Pyboard Virtual Comm Port in FS Mode  | 1.1 / 2.0   | :heavy_check_mark: |                                                   |
