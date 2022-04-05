@@ -15,8 +15,8 @@ Running uname -a from within WSL should report a kernel version of 5.10.60.1 or 
 From within WSL, install the user space tools for USB/IP and a database of USB hardware identifiers. On Ubuntu 20.04 LTS, run these commands:
 
 ```bash
-sudo apt install linux-tools-5.4.0-77-generic hwdata
-sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/5.4.0-77-generic/usbip 20
+sudo apt install linux-tools-virtual hwdata
+sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*/usbip 20
 ```
 
 ⚠️ **These instructions have changed.**\
