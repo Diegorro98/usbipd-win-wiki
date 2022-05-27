@@ -16,6 +16,8 @@
 | 0781:5588 | SanDisk Corp. USB Extreme Pro                     | 3.0 / 3.1   | :heavy_check_mark: |                                                   |
 | f055:9800 | MicroPython Pyboard Virtual Comm Port in FS Mode  | 1.1 / 2.0   | :heavy_check_mark: |                                                   |
 | 2e8a:0005 | Pimoroni pico lipo MicroPython Board in FS mode   | 1.1 / 2.0   | :heavy_check_mark: |                                                   |
+| 0781:5583 | SanDisk Ultra Fit                                 | 3.1         | ❌ | [#167](https://github.com/dorssel/usbipd-win/issues/167) |
+| 0781:5591 | SanDisk Ultra Flair                               | 3.0         | ❌ | [#167](https://github.com/dorssel/usbipd-win/issues/167) |
 
 #  Device Test Procedure 
 
