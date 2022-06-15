@@ -16,13 +16,16 @@ From within WSL, install the user space tools for USB/IP and a database of USB h
 
 ```bash
 sudo apt install linux-tools-virtual hwdata
-sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*/usbip 20
+sudo update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-tools/*/usbip | tail -n1` 20
 ```
 
 ⚠️ **These instructions have changed.**\
 Updating to `usbipd-win` version 2.0.0 or higher will require these new instructions, even if the old instructions were followed before.
 
-:information_source: **Other distributions.**\
+ℹ️ **Installing package updates.**\
+After installing package updates (e.g. with `apt upgrade`), you may have to run `update-alternatives` again to re-enable the `usbip` command.
+
+ℹ️ **Other distributions.**\
 For other distributions a different `usbip` client package may be required. In any case, make sure that the resulting `usbip` command is in the PATH for user root; for example by adjusting the above `update-alternatives`. Please search the (possibly closed) [issues](https://github.com/dorssel/usbipd-win/issues?q=is%3Aissue) to see if instructions for your distribution are already known.
 
 ## udev
