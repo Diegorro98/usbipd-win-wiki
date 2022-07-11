@@ -34,6 +34,13 @@ Note that depending on your application, you may need to configure udev rules to
 
 After updating your rules run `udevadm control --reload`. If you get an error that "Failed to send reload request: No such file or directory", run `sudo service udev restart` then run it again.
 
+If you plan to allow non-root users to access the device frequently and udev service is stopped every time the distribution is booted, you can add this to `/etc/wsl.conf`:
+
+```
+[boot]
+command = "service udev restart"
+```
+
 # WSL convenience commands
 
 After following the setup instructions above and installing usbipd in Windows, you can use the usbipd WSL convenience commands to easily attach devices to a WSL instance and view which distributions devices are attached to.
