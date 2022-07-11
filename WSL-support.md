@@ -232,3 +232,50 @@ kernel=c:\\users\\<user>\\usbip-bzImage
 ```
 
 Your WSL distro is now ready to use!
+
+# Bluetooth on WSL2
+
+If you have a Bluetooth adapter available to attach using usbipd (you can check it by checking if is present in `usbipd list`), you can make it work in WSL2 by following these steps:
+
+First you should check if it there is kernel drivers for the device, you can check it in [Hardware for Linux](https://linux-hardware.org/?view=search) with the id of the Bluetooth adapter.
+You can obtain it by executing `usbipd list`:
+```
+BUSID  VID:PID		DEVICE				STATE
+1-1    xxxx:0000  	Bluetooth device	Not attached
+```
+\
+After knowing that there is kernel drivers, you should follow [Building your own USB/IP enabled WSL 2 kernel](/WSL-support.md#building-your-own-usbip-enabled-wsl-2-kernel) instructions but enable the following Bluetooth features and those on which they depend in menuconfig:\
+Networking support -> Bluetooth subsystem support\
+Networking support -> Bluetooth subsystem support -> Bluetooth device drivers -> Bluetooth HCI USB driver\
+
+Install bluez:
+```
+sudo apt-get install bluez
+```
+
+Enable Bluetooth:
+```
+echo 'export BLUETOOTH_ENABLED=1' | sudo tee /etc/default/bluetooth
+```
+
+Start dbus and Bluetooth services:
+```
+sudo service dbus start
+sudo service bluetooth start
+```
+
+Alternatively, if you are going to use frequently the Bluetooth device on the distro, you can start the services every time the distro is booted by setting in `/etc/wsl.conf` the following content: 
+```
+[boot]
+command = "service dbus start && service bluetooth start"
+```
+
+Attach the Bluetooth device to the WSL2 distro using usbipd and test if it works by running `bluetoothctl list`. you should get an output similar to this:
+```
+Controller XX:XX:XX:XX:XX:XX BlueZ 5.53 [default]
+```
+ 
+If it doesn't work, it might be due to one of the following reasons:
+- There isn't any kernel drivers. Check it at Hardware linux.
+- The device is too new. Microsoft wsl2 kernel might not support yet the device. Check https://github.com/dorssel/usbipd-win/discussions/310#discussioncomment-2483246.
+- Some more features are required at the kernel's menuconfig. Check Hardware for linux to see if there is additional features required at Config column.
